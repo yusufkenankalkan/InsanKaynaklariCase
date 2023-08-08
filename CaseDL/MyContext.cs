@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CaseEL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,10 @@ namespace CaseDL
         {
 
         }
-        
-
+        public DbSet<AdayCv> AdayCv { get; set; }
+        public DbSet<Sicil> Sicil { get; set; }
+        public DbSet<SicilOgrenim> SicilOgrenim { get; set; }
+        public DbSet<SicilUcret> SicilUcret { get; set; }
 
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaseEL.Models
+namespace CaseEL.ViewModels
 {
-    [Table("AdayCvler")]
-    public class AdayCv
+    public class AdayCvVM
     {
-        [Key]
         public int CvNo { get; set; }
 
         [Required]
@@ -24,7 +21,7 @@ namespace CaseEL.Models
 
         public DateTime DogumTarihi { get; set; }
 
-        public DateTime CvOlusturmaTarihi { get; set; } = DateTime.Now;
+        public DateTime CvOlusturmaTarihi { get; set; }
 
         public string OgrenimDurumu { get; set; }
 

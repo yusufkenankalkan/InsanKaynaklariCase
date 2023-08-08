@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CaseEL.Models
 {
     [Table("SicilOgrenimler")]
-    public class SicilOgrenim
+    public class SicilOgrenim : BaseNumeric
     {
         [Key]
         public int Id { get; set; }

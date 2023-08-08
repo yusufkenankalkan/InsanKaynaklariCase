@@ -22,9 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>
