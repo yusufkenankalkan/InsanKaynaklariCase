@@ -13,20 +13,6 @@ namespace CaseEL.Models
         [Key]
         [Column(Order = 1)]
         public int SicilNo { get; set; }
-        public DateTime BaslamaTarihi { get; set; } 
-        public DateTime? BitisTarihi { get; set; }
-        public DateTime DogumTarihi { get; set; }
-        public bool AktifMi { get; set; }
-        public BaseNumeric()
-        {
-            SicilNo = GenerateRandomId();
-            BaslamaTarihi = DateTime.Now;
-        }
-
-        private int GenerateRandomId()
-        {
-            Random random = new Random();
-            return random.Next(10000, 99999);
-        }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

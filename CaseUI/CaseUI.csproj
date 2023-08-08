@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CaseBL\CaseBL.csproj" />
+    <ProjectReference Include="..\CaseDL\CaseDL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -16,5 +16,9 @@ namespace CaseEL.ViewModels
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string Soyad { get; set; }
+        public DateTime BaslamaTarihi { get; set; }
+        public DateTime? BitisTarihi { get; set; }
+        public DateTime DogumTarihi { get; set; }
+        public bool AktifMi { get; set; } = true;
     }
 }

@@ -1,8 +1,62 @@
-﻿@{
+﻿@using CaseEL.ViewModels;
+@model SicilVM
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="/Home/Index">Sicil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Sicil Ücret</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Sicil Öğrenim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">CV Tanımlama</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Rapor</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Yeni bir kayıt eklemek için bilgileri doldurun</h5>
+        <div>
+            <form class="needs-validation" novalidate asp-controller="Home" asp-action="AddSicil" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName" name="Ad" placeholder="" value="" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName" name="Soyad" placeholder="" value="" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="date1">Doğum Tarihi</label>
+                        <input type="date" class="form-control" id="date1" name="DogumTarihi" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="date2">İşe Başlama Tarihi</label>
+                        <input type="date" class="form-control" id="date2" name="BaslamaTarihi" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="date3">İşten Ayrılma Tarihi</label>
+                        <input type="date" class="form-control" id="date3" name="BitisTarihi" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">EKLE</button>
+            </form>
+        </div>
+    </div>
 </div>
+

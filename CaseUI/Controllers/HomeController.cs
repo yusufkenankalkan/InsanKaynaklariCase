@@ -1,4 +1,7 @@
-﻿using CaseUI.Models;
+﻿using CaseDL;
+using CaseEL.Models;
+using CaseEL.ViewModels;
+using CaseUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,11 +9,10 @@ namespace CaseUI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MyContext _context;
+        public HomeController(MyContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -18,15 +20,30 @@ namespace CaseUI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult AddSicil(SicilVM model)
         {
-            return View();
-        }
+            if (ModelState.IsValid)
+            {
+                
+                Sicil newSicil = new Sicil
+                {
+                    Ad = model.Ad,
+                    Soyad = model.Soyad,
+                    BaslamaTarihi = model.BaslamaTarihi,
+                    BitisTarihi = model.BitisTarihi,
+                    DogumTarihi = model.DogumTarihi,
+                    AktifMi = model.AktifMi
+                };
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                _context.Sicil.Add(newSicil);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            
+            return View(model); 
         }
     }
 }
