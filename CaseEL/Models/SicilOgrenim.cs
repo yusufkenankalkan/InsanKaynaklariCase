@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CaseEL.Models
 {
+    [Table("SicilOgrenimler")]
     public class SicilOgrenim
     {
         [Key]

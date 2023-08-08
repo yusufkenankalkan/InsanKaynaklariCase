@@ -41,7 +41,7 @@ namespace CaseEL.Models
         public string UcretTipi { get; set; } 
         public decimal UcretTutari { get; set; }
 
-        public DateTime GecerlilikBaslangicTarihi { get; set; } 
+        public DateTime GecerlilikBaslangicTarihi { get; set; }
     }
 
 }
