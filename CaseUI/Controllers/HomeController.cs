@@ -135,10 +135,10 @@ namespace CaseUI.Controllers
         [HttpPost]
         public IActionResult UcretKaydet(SicilUcretVM model)
         {
-           
+
             var relatedSicil = _sicilManager.GetByConditions(s => s.SicilNo == model.SicilNo).Data;
 
-           
+
             if (relatedSicil == null)
             {
                 ModelState.AddModelError("", "Sicil bulunamadı!");
@@ -151,7 +151,7 @@ namespace CaseUI.Controllers
 
             if (ModelState.IsValid)
             {
-               
+
                 SicilUcret newUcret = new SicilUcret
                 {
                     SicilNo = relatedSicil.SicilNo,
@@ -160,14 +160,14 @@ namespace CaseUI.Controllers
                     GecerlilikBaslangicTarihi = model.GecerlilikBaslangicTarihi
                 };
 
-                
+
                 _context.SicilUcret.Add(newUcret);
                 _context.SaveChanges();
 
                 return RedirectToAction("SicilUcret");
             }
 
-            
+
             ViewBag.SicilListesi = _context.Sicil.Where(s => s.AktifMi == true).ToList();
             return View("SicilUcret", model);
         }
@@ -182,11 +182,44 @@ namespace CaseUI.Controllers
             return View();
         }
 
-
+        [HttpGet]
         public IActionResult AdayCv()
         {
+            ViewBag.AdayCvListesi = _context.AdayCv.ToList();
             return View();
         }
 
+
+        [HttpPost]
+        public IActionResult AdayCvKaydet(AdayCvVM model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                AdayCv newAday = new AdayCv
+                {
+                    CvNo = model.CvNo,
+                    Ad = model.Ad,
+                    Soyad = model.Soyad,
+                    DogumTarihi = model.DogumTarihi,
+                    CvOlusturmaTarihi = model.CvOlusturmaTarihi,
+                    OgrenimDurumu = model.OgrenimDurumu,
+                    OkulAdi = model.OkulAdi,
+                    Bolum = model.Bolum,
+                    OgrenimBaslangicTarihi = model.OgrenimBaslangicTarihi,
+                    OgrenimBitisTarihi = model.OgrenimBitisTarihi,
+                    IsYeriAdi = model.IsYeriAdi,
+                    IsDetayi = model.IsDetayi,
+                };
+
+                _context.AdayCv.Add(newAday);
+                _context.SaveChanges();
+
+                return RedirectToAction("AdayCv");
+            }
+
+
+            return View(model);
+        }
     }
 }
