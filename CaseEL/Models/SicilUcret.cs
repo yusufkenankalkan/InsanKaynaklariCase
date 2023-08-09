@@ -14,7 +14,6 @@ namespace CaseEL.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Sicil")] 
         public int SicilNo { get; set; }
 
         public string UcretTipi { get; set; } 
@@ -23,6 +22,7 @@ namespace CaseEL.Models
 
         public DateTime GecerlilikBaslangicTarihi { get; set; }
 
+        [ForeignKey("SicilNo")]
         public virtual Sicil Sicil { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CaseDL.Migrations
 {
     /// <inheritdoc />
-    public partial class example : Migration
+    public partial class a : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,10 +27,7 @@ namespace CaseDL.Migrations
                     OgrenimBaslangicTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OgrenimBitisTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsYeriAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDetayi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UcretTipi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UcretTutari = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    GecerlilikBaslangicTarihi = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    IsDetayi = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

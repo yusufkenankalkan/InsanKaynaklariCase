@@ -1,0 +1,91 @@
+﻿@using CaseEL.ViewModels;
+@model AdayCvVM
+
+@{
+    ViewData["Title"] = "AdayCv";
+}
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Index">Sicil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilUcret">Sicil Ücret</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilOgrenim">Sicil Öğrenim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/Home/AdayCv">CV Tanımlama</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Rapor</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Aday CV Doldurma Ekranı</h5>
+        <div>
+            <form class="needs-validation" novalidate asp-controller="Home" asp-action="AdayCvKaydet" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="isim">İsim</label>
+                        <input type="text" class="form-control" id="isim" name="Ad" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="soyisim">Soyisim</label>
+                        <input type="text" class="form-control" id="soyisim" name="Soyad" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="date1">Doğum Tarihi</label>
+                        <input type="date" class="form-control" id="date1" name="DogumTarihi" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="date2">CV Oluşturma Tarihi</label>
+                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="ogrenimDurumu">Öğrenim Durumu</label>
+                        <input type="text" class="form-control" id="ogrenimDurumu" name="OgrenimDurumu" placeholder="Lise, Önlisans, Lisans vb."  required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="okulAdi">Okul Adı</label>
+                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="bolum">Bölüm</label>
+                        <input type="text" class="form-control" id="bolum" name="Bolum" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="date3">Eğitim Başlangıç Tarihi</label>
+                        <input type="date" class="form-control" id="date3" name="EgitimBaslangıcTarihi" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="date4">Eğitim Bitiş Tarihi</label>
+                        <input type="date" class="form-control" id="date4" name="EgitimBitisTarihi" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="isYeri">İş Yeri</label>
+                        <input type="text" class="form-control" id="isYeri" name="IsYeri" placeholder="Son iş yerinizin ismi" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="isDetayi">İş Detayı</label>
+                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Aday Olarak Kaydet</button>
+            </form>
+        </div>
+    </div>
+</div>

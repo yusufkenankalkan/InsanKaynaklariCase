@@ -37,10 +37,6 @@ namespace CaseEL.ViewModels
 
         public string? IsDetayi { get; set; }
 
-        public string UcretTipi { get; set; }
-        public decimal UcretTutari { get; set; }
-
-        public DateTime? GecerlilikBaslangicTarihi { get; set; }
     }
 
 }

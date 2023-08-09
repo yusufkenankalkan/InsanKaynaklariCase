@@ -1,31 +1,44 @@
-﻿using CaseDL;
+﻿using CaseBL.ImplementationsOfManager;
+using CaseBL.InterfacesOfManager;
+using CaseDL;
 using CaseEL.Models;
 using CaseEL.ViewModels;
 using CaseUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CaseUI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly MyContext _context;
-        public HomeController(MyContext context)
+        private readonly ISicilManager _sicilManager;
+        private readonly ISicilUcretManager _sicilUcretManager;
+
+        public HomeController(MyContext context, ISicilManager sicilManager, ISicilUcretManager sicilUcretManager)
         {
             _context = context;
+            _sicilManager = sicilManager;
+            _sicilUcretManager = sicilUcretManager;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
+            var sicilListesi = _context.Sicil.Where(s => s.AktifMi == true).ToList();
+
+            ViewBag.SicilListesi = sicilListesi;
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddSicil(SicilVM model)
+        public IActionResult SicilEkle(SicilVM model)
         {
             if (ModelState.IsValid)
             {
-                
+
                 Sicil newSicil = new Sicil
                 {
                     Ad = model.Ad,
@@ -42,8 +55,138 @@ namespace CaseUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            
-            return View(model); 
+
+            return View(model);
         }
+
+        [HttpGet]
+        public IActionResult SicilDuzenle(int id)
+        {
+            var sicil = _context.Sicil.Find(id);
+            if (sicil == null)
+            {
+                return NotFound();
+            }
+
+            var model = new SicilVM
+            {
+                Ad = sicil.Ad,
+                Soyad = sicil.Soyad,
+                BaslamaTarihi = sicil.BaslamaTarihi,
+                BitisTarihi = sicil.BitisTarihi,
+                DogumTarihi = sicil.DogumTarihi,
+                AktifMi = sicil.AktifMi
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult SicilDuzenle(int id, SicilVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var sicil = _context.Sicil.SingleOrDefault(s => s.SicilNo == id);
+
+                if (sicil == null)
+                {
+                    return NotFound();
+                }
+
+                sicil.Ad = model.Ad;
+                sicil.Soyad = model.Soyad;
+                sicil.BaslamaTarihi = model.BaslamaTarihi;
+                sicil.BitisTarihi = model.BitisTarihi;
+                sicil.DogumTarihi = model.DogumTarihi;
+                sicil.AktifMi = model.AktifMi;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult Sil(int id)
+        {
+            var sicil = _context.Sicil.Find(id);
+            if (sicil == null)
+            {
+                return NotFound();
+            }
+
+            sicil.AktifMi = false;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult SicilUcret()
+        {
+            var sicilListesi = _context.Sicil.Where(s => s.AktifMi == true).ToList();
+
+            ViewBag.SicilListesi = sicilListesi;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UcretKaydet(SicilUcretVM model)
+        {
+           
+            var relatedSicil = _sicilManager.GetByConditions(s => s.SicilNo == model.SicilNo).Data;
+
+           
+            if (relatedSicil == null)
+            {
+                ModelState.AddModelError("", "Sicil bulunamadı!");
+                ViewBag.SicilListesi = _context.Sicil.Where(s => s.AktifMi == true).ToList();
+                return View("SicilUcret", model);
+            }
+
+            model.Sicil = relatedSicil;
+
+
+            if (ModelState.IsValid)
+            {
+               
+                SicilUcret newUcret = new SicilUcret
+                {
+                    SicilNo = relatedSicil.SicilNo,
+                    UcretTipi = model.UcretTipi,
+                    UcretTutari = model.UcretTutari,
+                    GecerlilikBaslangicTarihi = model.GecerlilikBaslangicTarihi
+                };
+
+                
+                _context.SicilUcret.Add(newUcret);
+                _context.SaveChanges();
+
+                return RedirectToAction("SicilUcret");
+            }
+
+            
+            ViewBag.SicilListesi = _context.Sicil.Where(s => s.AktifMi == true).ToList();
+            return View("SicilUcret", model);
+        }
+
+        [HttpGet]
+        public IActionResult SicilOgrenim()
+        {
+            var sicilListesi = _context.Sicil.Where(s => s.AktifMi == true).ToList();
+
+            ViewBag.SicilListesi = sicilListesi;
+
+            return View();
+        }
+
+
+        public IActionResult AdayCv()
+        {
+            return View();
+        }
+
     }
 }

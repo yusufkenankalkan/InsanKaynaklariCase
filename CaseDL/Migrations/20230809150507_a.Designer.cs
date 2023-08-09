@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CaseDL.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230808144530_example")]
-    partial class example
+    [Migration("20230809150507_a")]
+    partial class a
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,9 +48,6 @@ namespace CaseDL.Migrations
                     b.Property<DateTime>("DogumTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("GecerlilikBaslangicTarihi")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("IsDetayi")
                         .HasColumnType("nvarchar(max)");
 
@@ -75,13 +72,6 @@ namespace CaseDL.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UcretTipi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("UcretTutari")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("CvNo");
 

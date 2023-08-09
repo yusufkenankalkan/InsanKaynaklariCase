@@ -1,0 +1,87 @@
+﻿@using CaseEL.ViewModels;
+@model SicilUcretVM
+
+@{
+    ViewData["Title"] = "SicilUcret";
+}
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Index">Sicil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/Home/SicilUcret">Sicil Ücret</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilOgrenim">Sicil Öğrenim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/AdayCv">CV Tanımlama</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Rapor</a>
+            </li>
+        </ul>
+    </div>
+
+    <br />
+    <br />
+
+    <div class="text-center">
+        <h2>Ücret Düzenleme Ekranı</h2>
+    </div>
+
+    <br />
+    <br />
+
+    @if (ViewBag.SicilListesi != null)
+    {
+        <table class="table table-hover table-bordered" id="ucretTable">
+            <thead>
+                <tr style="text-align:center">
+                    <th>Sicil No</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Ücret Tipi</th>
+                    <th>Ücret Tutarı</th>
+                    <th>Geçerlilik Başlangıç Tarihi</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sicil in ViewBag.SicilListesi)
+                {
+                    <form asp-controller="Home" asp-action="UcretKaydet" method="post">
+                    <tr style="text-align:center">
+                        <td>@sicil.SicilNo</td>
+                        <td>@sicil.Ad</td>
+                        <td>@sicil.Soyad</td>
+                        <td>
+                            <input type="hidden" name="SicilNo" value="@sicil.SicilNo" />
+                            <select name="UcretTipi" class="form-control">
+                                <option value="" disabled selected>**Seçiniz**</option>
+                                <option value="Net">Net</option>
+                                <option value="Brüt">Brüt</option>
+                            </select>
+                        </td>
+
+                        <td><input type="number" name="UcretTutari" class="form-control" placeholder="Ücret Tutarı" /></td>
+                        <td><input type="date" name="GecerlilikBaslangicTarihi" class="form-control" /></td>
+                        <td>
+                            <button type="submit" class="btn btn-success btn-sm">Kaydet</button>
+                            <a href="@Url.Action("Sil", "Home", new { id = sicil.SicilNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
+                        </td>
+                    </tr>
+                    </form>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Hiç Sicil Kaydı Bulunmuyor.</p>
+    }
+
+</div>

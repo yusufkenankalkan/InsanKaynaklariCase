@@ -13,14 +13,14 @@ namespace CaseEL.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [ForeignKey("Sicil")]
         public int SicilNo { get; set; }
         public string OgrenimDurumu { get; set; }
         public string OkulAdi { get; set; }
         public DateTime OgrenimBaslangicTarihi { get; set; } 
 
-        public DateTime? OgrenimBitisTarihi { get; set; } 
+        public DateTime? OgrenimBitisTarihi { get; set; }
+
+        [ForeignKey("SicilNo")]
         public virtual Sicil Sicil { get; set; }
     }
 }
