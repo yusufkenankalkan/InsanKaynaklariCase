@@ -26,7 +26,12 @@
         </ul>
     </div>
     <div class="card-body">
-        <h5 class="card-title">Aday CV Doldurma Ekranı</h5>
+        <h5 class="card-title">Aday CV Düzenleme Ekranı</h5>
+
+        <div class="alert alert-danger" id="errorAlert" style="display: none;">
+            Lütfen Gerekli Alanları Doldurunuz !!!
+        </div>
+
         <div>
             <form class="needs-validation" novalidate asp-controller="Home" asp-action="CvDuzenle" method="post">
                 <input type="hidden" name="CvNo" value="@Model.CvNo" />
@@ -85,8 +90,31 @@
                         <input type="text" class="form-control" id="isDetayi" name="IsDetayi" value="@Model.IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Güncelle</button>
+                <button type="submit" class="btn btn-primary" onclick="return validateForm()">Güncelle</button>
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    function validateForm() {
+        var isim = document.getElementById("isim").value;
+        var soyisim = document.getElementById("soyisim").value;
+        var dogumTarihi = document.getElementById("date1").value;
+        var cvOlusturmaTarihi = document.getElementById("date2").value;
+        var ogrenimDurumu = document.getElementById("ogrenimDurumu").value;
+        var okulAdi = document.getElementById("okulAdi").value;
+        var bolum = document.getElementById("bolum").value;
+        var egitimBaslangicTarihi = document.getElementById("date3").value;
+
+        if (isim === "" || soyisim === "" || dogumTarihi === "" || cvOlusturmaTarihi === "" ||
+            ogrenimDurumu === "" || okulAdi === "" || bolum === "" ||
+            egitimBaslangicTarihi === "") {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>

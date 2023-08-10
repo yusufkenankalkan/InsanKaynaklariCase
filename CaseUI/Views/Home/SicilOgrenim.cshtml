@@ -33,6 +33,10 @@
         <h2>Eğitim Bilgileri Düzenleme Ekranı</h2>
     </div>
 
+    <div class="alert alert-danger" id="errorAlert" style="display: none;">
+        Lütfen Gerekli Alanları Doldurunuz !!!
+    </div>
+
     <br />
     <br />
 
@@ -54,7 +58,7 @@
             <tbody>
                 @foreach (var sicil in ViewBag.SicilListesi)
                 {
-                    <form asp-controller="Home" asp-action="OgrenimKaydet" method="post">
+                    <form asp-controller="Home" asp-action="OgrenimKaydet" method="post" onsubmit="return validateForm(this)">
                     <tr style="text-align:center">
                         <td>@sicil.SicilNo</td>
                         <td>@sicil.Ad</td>
@@ -94,4 +98,18 @@
 
 </div>
 
+<script>
+    function validateForm(form) {
+        var ogrenimDurumu = form.OgrenimDurumu.value;
+        var okulAdi = form.OkulAdı.value;
+        var baslangicTarihi = form.EğitimBaslangicTarihi.value;
 
+        if (ogrenimDurumu === "" || okulAdi === "" || baslangicTarihi === "" || ) {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>

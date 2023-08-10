@@ -27,8 +27,13 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">Aday CV Doldurma Ekranı</h5>
+
+        <div class="alert alert-danger" id="errorAlert" style="display: none;">
+            Lütfen Gerekli Alanları Doldurunuz !!!
+        </div>
+
         <div>
-            <form class="needs-validation" novalidate asp-controller="Home" asp-action="AdayCvKaydet" method="post">
+            <form class="needs-validation" novalidate asp-controller="Home" asp-action="AdayCvKaydet" method="post" onsubmit="return validateForm()">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isim">İsim</label>
@@ -136,3 +141,26 @@
         <p>Hiç Sicil kaydı bulunmuyor.</p>
     }
 </div>
+
+<script>
+    function validateForm() {
+        var isim = document.getElementById("isim").value;
+        var soyisim = document.getElementById("soyisim").value;
+        var dogumTarihi = document.getElementById("date1").value;
+        var cvOlusturmaTarihi = document.getElementById("date2").value;
+        var ogrenimDurumu = document.getElementById("ogrenimDurumu").value;
+        var okulAdi = document.getElementById("okulAdi").value;
+        var bolum = document.getElementById("bolum").value;
+        var egitimBaslangicTarihi = document.getElementById("date3").value;
+
+        if (isim === "" || soyisim === "" || dogumTarihi === "" || cvOlusturmaTarihi === "" ||
+            ogrenimDurumu === "" || okulAdi === "" || bolum === "" ||
+            egitimBaslangicTarihi === "") {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>

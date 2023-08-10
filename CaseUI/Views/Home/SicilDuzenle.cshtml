@@ -28,6 +28,11 @@
 
     <div class="card-body">
         <h5 class="card-title">Bilgileri düzenlemek için aşağıdaki alanları güncelleyin</h5>
+
+        <div class="alert alert-danger" id="errorAlert" style="display: none;">
+            Lütfen Gerekli Alanları Doldurunuz !!!
+        </div>
+
         <div>
             <form asp-controller="Home" asp-action="SicilDuzenle" method="post">
                 <input type="hidden" name="SicilNo" value="@Model.SicilNo" />
@@ -57,9 +62,25 @@
                         <input type="date" class="form-control" id="date3" name="BitisTarihi" value="@Model.BitisTarihi?.ToString("yyyy-MM-dd")">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-success">KAYDET</button>
+                <button type="submit" class="btn btn-success" onclick="return validateForm()">KAYDET</button>
             </form>
         </div>
     </div>
 </div>
 
+<script>
+    function validateForm() {
+        var isim = document.getElementById("isim").value;
+        var soyisim = document.getElementById("soyisim").value;
+        var dogumTarihi = document.getElementById("date1").value;
+        var baslamaTarihi = document.getElementById("date2").value;
+
+        if (isim === "" || soyisim === "" || dogumTarihi === "" || baslamaTarihi === "") {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>

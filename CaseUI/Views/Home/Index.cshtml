@@ -31,22 +31,22 @@
             <form class="needs-validation" novalidate asp-controller="Home" asp-action="SicilEkle" method="post">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="isim">İsim</label>
-                        <input type="text" class="form-control" id="isim" name="Ad"  required>
+                        <label for="isim">İsim <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="isim" name="Ad" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="soyisim">Soyisim</label>
+                        <label for="soyisim">Soyisim <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="soyisim" name="Soyad" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label for="date1">Doğum Tarihi</label>
+                        <label for="date1">Doğum Tarihi <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" id="date1" name="DogumTarihi" required>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="date2">İşe Başlama Tarihi</label>
+                        <label for="date2">İşe Başlama Tarihi <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" id="date2" name="BaslamaTarihi" required>
                     </div>
                     <div class="col-md-4 mb-3">
@@ -54,7 +54,12 @@
                         <input type="date" class="form-control" id="date3" name="BitisTarihi" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">EKLE</button>
+
+                <div class="alert alert-danger" id="errorAlert" style="display: none;">
+                    Lütfen "*" İle İşaretli Alanları Doldurunuz !!!
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="return validateForm()">EKLE</button>
+
             </form>
         </div>
     </div>
@@ -104,6 +109,22 @@
 
 </div>
 
+<script>
+    function validateForm() {
+        var isim = document.getElementById("isim").value;
+        var soyisim = document.getElementById("soyisim").value;
+        var dogumTarihi = document.getElementById("date1").value;
+        var baslamaTarihi = document.getElementById("date2").value;
+
+        if (isim === "" || soyisim === "" || dogumTarihi === "" || baslamaTarihi === "") {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>
 
 
 

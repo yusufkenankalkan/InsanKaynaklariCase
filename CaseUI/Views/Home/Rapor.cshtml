@@ -25,17 +25,16 @@
             </li>
         </ul>
     </div>
-    
+    <div class="mt-2">
+        <input type="checkbox" id="aktifCalisan" onchange="filterTable()"> Aktif Çalışan
+        <input type="checkbox" id="pasifCalisan" onchange="filterTable()"> Pasif Çalışan
+    </div>
+    <div class="mt-2">
+        İşe Başlangıç Tarihi Başlangıç: <input type="date" id="baslangicTarihi">
+        İşe Başlangıç Tarihi Bitiş: <input type="date" id="bitisTarihi">
+        <button onclick="filterTable()">Filtrele</button>
+    </div>
     <table class="table table-hover table-bordered">
-        <div class="mt-2">
-            <input type="checkbox" id="aktifCalisan" onchange="filterTable()"> Aktif Çalışan
-            <input type="checkbox" id="pasifCalisan" onchange="filterTable()"> Pasif Çalışan
-        </div>
-        <div class="mt-2">
-            İşe Başlangıç Tarihi Başlangıç: <input type="date" id="baslangicTarihi">
-            İşe Başlangıç Tarihi Bitiş: <input type="date" id="bitisTarihi">
-            <button onclick="filterTable()">Filtrele</button>
-        </div>
         <thead>
             <tr>
                 <th>Sicil No</th>
