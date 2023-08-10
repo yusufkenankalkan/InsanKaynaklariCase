@@ -37,56 +37,65 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isim">İsim</label>
-                        <input type="text" class="form-control" id="isim" name="Ad" required>
+                        <input type="text" class="form-control" id="isim" name="Ad" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="soyisim">Soyisim</label>
-                        <input type="text" class="form-control" id="soyisim" name="Soyad" required>
+                        <input type="text" class="form-control" id="soyisim" name="Soyad" >
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="date1">Doğum Tarihi</label>
-                        <input type="date" class="form-control" id="date1" name="DogumTarihi" required>
+                        <input type="date" class="form-control" id="date1" name="DogumTarihi" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="date2">CV Oluşturma Tarihi</label>
-                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi" required>
+                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="ogrenimDurumu">Öğrenim Durumu</label>
-                        <input type="text" class="form-control" id="ogrenimDurumu" name="OgrenimDurumu" placeholder="Lise, Önlisans, Lisans vb."  required>
+                        <select name="OgrenimDurumu" class="form-control" id="ogrenimDurumu">
+                            <option value="" disabled selected>**Seçiniz**</option>
+                            <option value="İlkokul">İlkokul</option>
+                            <option value="Ortaokul">Ortaokul</option>
+                            <option value="Lise">Lise</option>
+                            <option value="Önlisans">Önlisans</option>
+                            <option value="Lisans">Lisans</option>
+                            <option value="Yüksek Lisans">Yüksek lisans</option>
+                            <option value="Doktora">Doktora</option>
+                        </select>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="okulAdi">Okul Adı</label>
-                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi" required>
+                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi" >
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="bolum">Bölüm</label>
-                        <input type="text" class="form-control" id="bolum" name="Bolum" required>
+                        <input type="text" class="form-control" id="bolum" name="Bolum" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="date3">Eğitim Başlangıç Tarihi</label>
-                        <input type="date" class="form-control" id="date3" name="OgrenimBaslangicTarihi" required>
+                        <input type="date" class="form-control" id="date3" name="OgrenimBaslangicTarihi" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="date4">Eğitim Bitiş Tarihi</label>
-                        <input type="date" class="form-control" id="date4" name="OgrenimBitisTarihi" required>
+                        <input type="date" class="form-control" id="date4" name="OgrenimBitisTarihi" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isYeriAdi">İş Yeri</label>
-                        <input type="text" class="form-control" id="isYeriAdi" name="IsYeriAdi" placeholder="Son iş yerinizin ismi" required>
+                        <input type="text" class="form-control" id="isYeriAdi" name="IsYeriAdi" placeholder="Son iş yerinizin ismi" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="isDetayi">İş Detayı</label>
-                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" required>
+                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" >
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Aday Olarak Kaydet</button>

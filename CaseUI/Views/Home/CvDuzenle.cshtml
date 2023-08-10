@@ -38,56 +38,56 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isim">İsim</label>
-                        <input type="text" class="form-control" id="isim" name="Ad" value="@Model.Ad" required>
+                        <input type="text" class="form-control" id="isim" name="Ad" value="@Model.Ad" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="soyisim">Soyisim</label>
-                        <input type="text" class="form-control" id="soyisim" name="Soyad" value="@Model.Soyad" required>
+                        <input type="text" class="form-control" id="soyisim" name="Soyad" value="@Model.Soyad" >
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="date1">Doğum Tarihi</label>
-                        <input type="date" class="form-control" id="date1" name="DogumTarihi" value="@Model.DogumTarihi.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" id="date1" name="DogumTarihi" value="@Model.DogumTarihi.ToString("yyyy-MM-dd")" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="date2">CV Oluşturma Tarihi</label>
-                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi" value="@Model.CvOlusturmaTarihi.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi" value="@Model.CvOlusturmaTarihi.ToString("yyyy-MM-dd")" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="ogrenimDurumu">Öğrenim Durumu</label>
-                        <input type="text" class="form-control" id="ogrenimDurumu" name="OgrenimDurumu" value="@Model.OgrenimDurumu" placeholder="Lise, Önlisans, Lisans vb." required>
+                        <input type="text" class="form-control" id="ogrenimDurumu" name="OgrenimDurumu" value="@Model.OgrenimDurumu" placeholder="Lise, Önlisans, Lisans vb." >
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="okulAdi">Okul Adı</label>
-                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi" value="@Model.OkulAdi" required>
+                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi" value="@Model.OkulAdi" >
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="bolum">Bölüm</label>
-                        <input type="text" class="form-control" id="bolum" name="Bolum" value="@Model.Bolum" required>
+                        <input type="text" class="form-control" id="bolum" name="Bolum" value="@Model.Bolum" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="date3">Eğitim Başlangıç Tarihi</label>
-                        <input type="date" class="form-control" id="date3" name="OgrenimBaslangicTarihi" value="@Model.OgrenimBaslangicTarihi.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" id="date3" name="OgrenimBaslangicTarihi" value="@Model.OgrenimBaslangicTarihi.ToString("yyyy-MM-dd")" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="date4">Eğitim Bitiş Tarihi</label>
-                        <input type="date" class="form-control" id="date4" name="OgrenimBitisTarihi" value="@Model.OgrenimBitisTarihi?.ToString("yyyy-MM-dd")" required>
+                        <input type="date" class="form-control" id="date4" name="OgrenimBitisTarihi" value="@Model.OgrenimBitisTarihi?.ToString("yyyy-MM-dd")" >
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isYeriAdi">İş Yeri</label>
-                        <input type="text" class="form-control" id="isYeriAdi" name="IsYeriAdi" value="@Model.IsYeriAdi" placeholder="Son iş yerinizin ismi" required>
+                        <input type="text" class="form-control" id="isYeriAdi" name="IsYeriAdi" value="@Model.IsYeriAdi" placeholder="Son iş yerinizin ismi" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="isDetayi">İş Detayı</label>
-                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" value="@Model.IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" required>
+                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" value="@Model.IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" >
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="return validateForm()">Güncelle</button>
