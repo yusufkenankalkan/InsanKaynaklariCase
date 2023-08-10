@@ -5,6 +5,7 @@ using CaseEL.Models;
 using CaseEL.ViewModels;
 using CaseUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
 
@@ -15,6 +16,8 @@ namespace CaseUI.Controllers
         private readonly MyContext _context;
         private readonly ISicilManager _sicilManager;
         private readonly ISicilUcretManager _sicilUcretManager;
+
+        
 
         public HomeController(MyContext context, ISicilManager sicilManager, ISicilUcretManager sicilUcretManager)
         {
@@ -189,7 +192,6 @@ namespace CaseUI.Controllers
             return View();
         }
 
-
         [HttpPost]
         public IActionResult AdayCvKaydet(AdayCvVM model)
         {
@@ -296,5 +298,59 @@ namespace CaseUI.Controllers
 
             return RedirectToAction("AdayCv");
         }
+
+        public IActionResult Rapor()
+        {
+            var tumSiciller = _context.Sicil.ToList();
+
+            var sicilOgrenimBilgileri = _context.SicilOgrenim.ToList();
+
+            var raporListesi = new List<SicilRaporVM>();
+
+            foreach (var sicil in tumSiciller)
+            {
+                var ogrenimBilgisi = sicilOgrenimBilgileri.FirstOrDefault(o => o.SicilNo == sicil.SicilNo);
+
+                var rapor = new SicilRaporVM
+                {
+                    SicilNo = sicil.SicilNo,
+                    Ad = sicil.Ad,
+                    Soyad = sicil.Soyad,
+                    BaslamaTarihi = sicil.BaslamaTarihi,
+                    BitisTarihi = sicil.BitisTarihi,
+                    AktifMi = sicil.AktifMi,
+                    OgrenimDurumu = ogrenimBilgisi?.OgrenimDurumu
+                };
+
+                raporListesi.Add(rapor);
+            }
+
+            ViewBag.RaporListesi = raporListesi;
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetAktifCalisanlar()
+        {
+            var aktifCalisanlar = _context.Sicil.Where(s => s.AktifMi).ToList();
+            return Json(aktifCalisanlar);
+        }
+
+        [HttpGet]
+        public IActionResult GetPasifCalisanlar()
+        {
+            var pasifCalisanlar = _context.Sicil.Where(s => !s.AktifMi).ToList();
+            return Json(pasifCalisanlar);
+        }
+
+        [HttpGet]
+        public IActionResult GetTumCalisanlar()
+        {
+            var tumCalisanlar = _context.Sicil.ToList();
+            return Json(tumCalisanlar);
+        }
+
+
     }
 }

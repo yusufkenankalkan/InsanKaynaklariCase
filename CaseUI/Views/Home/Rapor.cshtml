@@ -1,0 +1,123 @@
+﻿@using CaseEL.ViewModels;
+@model SicilRaporVM
+
+@{
+    ViewData["Title"] = "Rapor";
+}
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Index">Sicil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilUcret">Sicil Ücret</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilOgrenim">Sicil Öğrenim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/AdayCv">CV Tanımlama</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/Home/Rapor">Rapor</a>
+            </li>
+        </ul>
+    </div>
+    
+    <table class="table table-hover table-bordered">
+        <div class="mt-2">
+            <input type="checkbox" id="aktifCalisan" onchange="filterTable()"> Aktif Çalışan
+            <input type="checkbox" id="pasifCalisan" onchange="filterTable()"> Pasif Çalışan
+        </div>
+        <div class="mt-2">
+            İşe Başlangıç Tarihi Başlangıç: <input type="date" id="baslangicTarihi">
+            İşe Başlangıç Tarihi Bitiş: <input type="date" id="bitisTarihi">
+            <button onclick="filterTable()">Filtrele</button>
+        </div>
+        <thead>
+            <tr>
+                <th>Sicil No</th>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Başlama Tarihi</th>
+                <th>Bitiş Tarihi</th>
+                <th>Öğrenim Durumu</th>
+                <th>Aktif Mi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rapor in ViewBag.RaporListesi as List<CaseEL.ViewModels.SicilRaporVM>)
+            {
+                <tr style="text-align:center">
+                    <td>@rapor.SicilNo</td>
+                    <td>@rapor.Ad</td>
+                    <td>@rapor.Soyad</td>
+                    <td>@rapor.BaslamaTarihi.ToString("dd.MM.yyyy")</td>
+                    <td>@rapor.BitisTarihi?.ToString("dd.MM.yyyy")</td>
+                    <td>@rapor.OgrenimDurumu</td>
+                    <td>@(rapor.AktifMi ? "Evet" : "Hayır")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function filterTable() {
+        let aktifChecked = $('#aktifCalisan').is(':checked');
+        let pasifChecked = $('#pasifCalisan').is(':checked');
+        let baslangicTarihi = $('#baslangicTarihi').val();
+        let bitisTarihi = $('#bitisTarihi').val();
+
+        let url = "/Home/GetTumCalisanlar";
+
+        if (aktifChecked && !pasifChecked) {
+            url = "/Home/GetAktifCalisanlar";
+        } else if (!aktifChecked && pasifChecked) {
+            url = "/Home/GetPasifCalisanlar";
+        }
+
+        function formatDate(stringDate) {
+            const date = new Date(stringDate);
+            const day = ("0" + date.getDate()).slice(-2);
+            const month = ("0" + (date.getMonth() + 1)).slice(-2);
+            const year = date.getFullYear();
+
+            return `${day}.${month}.${year}`;
+        }
+
+        $.ajax({
+            url: url,
+            method: "GET",
+            success: function (data) {
+                let tbodyContent = "";
+
+                data.forEach(item => {
+                    const baslamaTarihiFormatted = item.baslamaTarihi ? formatDate(item.baslamaTarihi) : "";
+                    const bitisTarihiFormatted = item.bitisTarihi ? formatDate(item.bitisTarihi) : "";
+
+                    if ((!baslangicTarihi || item.baslamaTarihi >= baslangicTarihi) &&
+                        (!bitisTarihi || item.baslamaTarihi <= bitisTarihi)) {
+                        tbodyContent += `<tr style="text-align:center">
+                                        <td>${item.sicilNo}</td>
+                                        <td>${item.ad}</td>
+                                        <td>${item.soyad}</td>
+                                        <td>${baslamaTarihiFormatted}</td>
+                                        <td>${bitisTarihiFormatted}</td>
+                                        <td>${item.ogrenimDurumu}</td>
+                                        <td>${item.aktifMi ? "Evet" : "Hayır"}</td>
+                                    </tr>`;
+                    }
+                });
+
+                $("table tbody").html(tbodyContent);
+            },
+            error: function (error) {
+                console.error("Bir hata oluştu: ", error);
+            }
+        });
+    }
+</script>
