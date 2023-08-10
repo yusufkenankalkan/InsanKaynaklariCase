@@ -221,5 +221,80 @@ namespace CaseUI.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult CvDuzenle(int id)
+        {
+            var aday = _context.AdayCv.Find(id);
+            if (aday == null)
+            {
+                return NotFound();
+            }
+
+            var model = new AdayCvVM
+            {
+                Ad = aday.Ad,
+                Soyad = aday.Soyad,
+                DogumTarihi = aday.DogumTarihi,
+                CvOlusturmaTarihi = aday.CvOlusturmaTarihi,
+                OgrenimDurumu = aday.OgrenimDurumu,
+                OkulAdi = aday.OkulAdi,
+                Bolum = aday.Bolum,
+                OgrenimBaslangicTarihi = aday.OgrenimBaslangicTarihi,
+                OgrenimBitisTarihi = aday.OgrenimBitisTarihi,
+                IsYeriAdi = aday.IsYeriAdi,
+                IsDetayi = aday.IsDetayi
+                
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CvDuzenle(int id, AdayCvVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var aday = _context.AdayCv.SingleOrDefault(s => s.CvNo == id);
+
+                if (aday == null)
+                {
+                    return NotFound();
+                }
+
+                aday.Ad = model.Ad;
+                aday.Soyad = model.Soyad;                
+                aday.DogumTarihi = model.DogumTarihi;
+                aday.CvOlusturmaTarihi = model.CvOlusturmaTarihi;
+                aday.OgrenimDurumu = model.OgrenimDurumu;
+                aday.OkulAdi = model.OkulAdi;
+                aday.Bolum = model.Bolum;
+                aday.OgrenimBaslangicTarihi = model.OgrenimBaslangicTarihi;
+                aday.OgrenimBitisTarihi = model.OgrenimBitisTarihi;
+                aday.IsYeriAdi = model.IsYeriAdi;
+                aday.IsDetayi = model.IsDetayi;
+                
+                _context.SaveChanges();
+
+                return RedirectToAction("AdayCv");
+            }
+
+            return View(model);
+        }
+
+        public IActionResult CvSil(int id)
+        {
+            var adayCv = _context.AdayCv.Find(id);
+           
+            if (adayCv == null)
+            {
+                return NotFound();
+            }
+
+            _context.AdayCv.Remove(adayCv);
+            _context.SaveChanges();
+
+            return RedirectToAction("AdayCv");
+        }
     }
 }
