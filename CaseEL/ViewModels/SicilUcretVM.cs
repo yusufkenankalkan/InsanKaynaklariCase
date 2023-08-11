@@ -17,5 +17,6 @@ namespace CaseEL.ViewModels
         public DateTime GecerlilikBaslangicTarihi { get; set; }
 
         public SicilVM Sicil { get; set; }
+
     }
 }

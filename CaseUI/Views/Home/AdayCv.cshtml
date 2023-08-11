@@ -37,22 +37,22 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isim">İsim</label>
-                        <input type="text" class="form-control" id="isim" name="Ad" >
+                        <input type="text" class="form-control" id="isim" name="Ad">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="soyisim">Soyisim</label>
-                        <input type="text" class="form-control" id="soyisim" name="Soyad" >
+                        <input type="text" class="form-control" id="soyisim" name="Soyad">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="date1">Doğum Tarihi</label>
-                        <input type="date" class="form-control" id="date1" name="DogumTarihi" >
+                        <input type="date" class="form-control" id="date1" name="DogumTarihi">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="date2">CV Oluşturma Tarihi</label>
-                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi" >
+                        <input type="date" class="form-control" id="date2" name="CvOlusturmaTarihi">
                     </div>
                 </div>
                 <div class="row">
@@ -71,31 +71,31 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="okulAdi">Okul Adı</label>
-                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi" >
+                        <input type="text" class="form-control" id="okulAdi" name="OkulAdi">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="bolum">Bölüm</label>
-                        <input type="text" class="form-control" id="bolum" name="Bolum" >
+                        <input type="text" class="form-control" id="bolum" name="Bolum">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="date3">Eğitim Başlangıç Tarihi</label>
-                        <input type="date" class="form-control" id="date3" name="OgrenimBaslangicTarihi" >
+                        <input type="date" class="form-control" id="date3" name="OgrenimBaslangicTarihi">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="date4">Eğitim Bitiş Tarihi</label>
-                        <input type="date" class="form-control" id="date4" name="OgrenimBitisTarihi" >
+                        <input type="date" class="form-control" id="date4" name="OgrenimBitisTarihi">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isYeriAdi">İş Yeri</label>
-                        <input type="text" class="form-control" id="isYeriAdi" name="IsYeriAdi" placeholder="Son iş yerinizin ismi" >
+                        <input type="text" class="form-control" id="isYeriAdi" name="IsYeriAdi" placeholder="Son iş yerinizin ismi">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="isDetayi">İş Detayı</label>
-                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız" >
+                        <input type="text" class="form-control" id="isDetayi" name="IsDetayi" placeholder="Son işinizdeki görevinizi açıklayınız">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Aday Olarak Kaydet</button>
@@ -103,14 +103,15 @@
         </div>
     </div>
 
-    <div class="text-center">
-        <h2>Adayların CV Listesi</h2>
-    </div>
+
 
     <br />
 
-    @if (ViewBag.AdayCvListesi != null)
+    @if (ViewBag.AdayCvListesi.Count >= 1)
     {
+        <div class="text-center">
+            <h2>Adayların CV Listesi</h2>
+        </div>
         <table class="table table-hover table-bordered" id="cvTable">
             <thead>
                 <tr style="text-align:center">
@@ -131,13 +132,32 @@
                         <td>@aday.CvNo</td>
                         <td>@aday.Ad</td>
                         <td>@aday.Soyad</td>
-                        <td>@aday.DogumTarihi?.ToString("dd.MM.yyyy")</td>
+                        <td>@aday.DogumTarihi.ToString("dd.MM.yyyy")</td>
                         <td>@aday.OkulAdi</td>
                         <td>@aday.Bolum</td>
+                        <input type="hidden" asp-for="Ad" value="@aday.Ad" />
+                        <input type="hidden" asp-for="Soyad" value="@aday.Soyad" />
+                        <input type="hidden" asp-for="DogumTarihi" value="@aday.DogumTarihi" />
+                        <input type="hidden" asp-for="OkulAdi" value="@aday.OkulAdi" />
+                        <input type="hidden" asp-for="OgrenimDurumu" value="@aday.OgrenimDurumu" />
+                        <input type="hidden" asp-for="OgrenimBaslangicTarihi" value="@aday.OgrenimBaslangicTarihi" />
+                        <input type="hidden" asp-for="OgrenimBitisTarihi" value="@aday.OgrenimBitisTarihi" />
+                        <input type="hidden" asp-for="CvNo" value="@aday.CvNo" />
                         <td>
-                            <button type="submit" class="btn btn-success btn-sm">İşe Al</button>
-                            <a href="@Url.Action("CvDuzenle", "Home", new { id = aday.CvNo })" class="btn btn-info btn-sm">Düzenle</a>
-                            <a href="@Url.Action("CvSil", "Home", new { id = aday.CvNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
+                                @if (aday.IseAlindiMi == false)
+                                {
+                                <button type="submit" class="btn btn-success btn-sm">İşe Al</button>
+                                <a href="@Url.Action("CvDuzenle", "Home", new { id = aday.CvNo })" class="btn btn-info btn-sm">Düzenle</a>
+                                <a href="@Url.Action("CvSil", "Home", new { id = aday.CvNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
+                                }
+                                else
+                                {
+                                <button class="btn btn-secondary btn-sm" disabled>İşe Al</button>
+                                <a href="@Url.Action("CvSil", "Home", new { id = aday.CvNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
+                                }
+
+                            
+                            
                         </td>
                     </tr>
                     </form>
@@ -147,7 +167,9 @@
     }
     else
     {
-        <p>Hiç Sicil kaydı bulunmuyor.</p>
+        <div class="text-center">
+            <h3>Henüz Aday Eklemediniz</h3>
+        </div>
     }
 </div>
 

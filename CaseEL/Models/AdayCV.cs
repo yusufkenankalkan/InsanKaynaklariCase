@@ -12,6 +12,7 @@ namespace CaseEL.Models
     public class AdayCv
     {
         [Key]
+        [Column(Order = 1)]
         public int CvNo { get; set; }
 
         [Required]
@@ -39,6 +40,8 @@ namespace CaseEL.Models
         public string? IsYeriAdi { get; set; }
 
         public string? IsDetayi { get; set; }
+
+        public bool IseAlindiMi { get; set; }
 
     }
 

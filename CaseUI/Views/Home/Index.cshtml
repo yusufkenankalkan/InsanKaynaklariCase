@@ -32,26 +32,26 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="isim">İsim <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="isim" name="Ad" >
+                        <input type="text" class="form-control" id="isim" name="Ad">
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="soyisim">Soyisim <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="soyisim" name="Soyad" >
+                        <input type="text" class="form-control" id="soyisim" name="Soyad">
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="date1">Doğum Tarihi <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="date1" name="DogumTarihi" >
+                        <input type="date" class="form-control" id="date1" name="DogumTarihi">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="date2">İşe Başlama Tarihi <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="date2" name="BaslamaTarihi" >
+                        <input type="date" class="form-control" id="date2" name="BaslamaTarihi">
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="date3">İşten Ayrılma Tarihi</label>
-                        <input type="date" class="form-control" id="date3" name="BitisTarihi" >
+                        <input type="date" class="form-control" id="date3" name="BitisTarihi">
                     </div>
                 </div>
 
@@ -63,14 +63,14 @@
             </form>
         </div>
     </div>
-    <div class="text-center">
-        <h2>Sicil Listesi</h2>
-    </div>
-
+    
     <br />
 
-    @if (ViewBag.SicilListesi != null)
+    @if (ViewBag.SicilListesi.Count >= 1)
     {
+        <div class="text-center">
+            <h2>Sicil Listesi</h2>
+        </div>
         <table class="table table-hover table-bordered" id="sicilTable">
             <thead>
                 <tr style="text-align:center">
@@ -105,7 +105,7 @@
     else
     {
         <div class="text-center">
-            <h2>Henüz Sicil Eklemediniz</h2>
+            <h3>Henüz Sicil Eklemediniz</h3>
         </div>
     }
 

@@ -56,37 +56,68 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var sicil in ViewBag.SicilListesi)
+                @foreach (var sicil in ViewBag.SicilListesi as List<SicilVM>)
                 {
-                    <form asp-controller="Home" asp-action="OgrenimKaydet" method="post" onsubmit="return validateForm(this)">
-                    <tr style="text-align:center">
-                        <td>@sicil.SicilNo</td>
-                        <td>@sicil.Ad</td>
-                        <td>@sicil.Soyad</td>
-                        <td>
-                            <input type="hidden" name="SicilNo" value="@sicil.SicilNo" />
-                            <select name="OgrenimDurumu" class="form-control">
-                                <option value="" disabled selected>**Seçiniz**</option>
-                                <option value="İlkokul">İlkokul</option>
-                                <option value="Ortaokul">Ortaokul</option>
-                                <option value="Lise">Lise</option>
-                                <option value="Önlisans">Önlisans</option>
-                                <option value="Lisans">Lisans</option>
-                                <option value="Yüksek Lisans">Yüksek lisans</option>
-                                <option value="Doktora">Doktora</option>
-                                
-                            </select>
-                        </td>
 
-                        <td><input type="text" name="OkulAdı" class="form-control" placeholder="Okul Adı" /></td>
-                        <td><input type="date" name="EğitimBaslangicTarihi" class="form-control" /></td>
-                        <td><input type="date" name="EğitimBitisTarihi" class="form-control" /></td>
-                        <td>
-                            <button type="submit" class="btn btn-success btn-sm">Kaydet</button>
-                            <a href="@Url.Action("Sil", "Home", new { id = sicil.SicilNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
-                        </td>
+                    <tr style="text-align:center">
+                        @if (sicil.SicilOgrenim != null)
+                        {                            
+                            <td>@sicil.SicilNo</td>
+                            <td>@sicil.Ad</td>
+                            <td>@sicil.Soyad</td>
+                            <td>
+                                <input type="hidden" name="SicilNo" value="@sicil.SicilNo" />
+                                <span>@sicil.SicilOgrenim.OgrenimDurumu</span>
+                            </td>
+                            <td><span>@sicil.SicilOgrenim.OkulAdi</span></td>
+                            <td><span>@sicil.SicilOgrenim.OgrenimBaslangicTarihi.ToString("dd.MM.yyyy")</span></td>
+
+                            @if (sicil.SicilOgrenim.OgrenimBitisTarihi != null)
+                            {
+                                <td><span>@sicil.SicilOgrenim.OgrenimBitisTarihi?.ToString("dd.MM.yyyy")</span></td>
+                            }
+                            else
+                            {
+                                <td><span>-</span></td>
+
+                            }
+                            <td>
+                                <a href="@Url.Action("OgrenimDuzenle", "Home", new { id = sicil.SicilNo })" class="btn btn-info btn-sm">Düzenle</a>
+                                <a href="@Url.Action("Sil", "Home", new { id = sicil.SicilNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <form asp-controller="Home" asp-action="OgrenimKaydet" method="post" onsubmit="return validateForm(this)">
+                            <td>@sicil.SicilNo</td>
+                            <td>@sicil.Ad</td>
+                            <td>@sicil.Soyad</td>
+                            <td>
+                                <input type="hidden" name="SicilNo" value="@sicil.SicilNo" />
+                                <select name="OgrenimDurumu" class="form-control">
+                                    <option value="" disabled selected>**Seçiniz**</option>
+                                    <option value="İlkokul">İlkokul</option>
+                                    <option value="Ortaokul">Ortaokul</option>
+                                    <option value="Lise">Lise</option>
+                                    <option value="Önlisans">Önlisans</option>
+                                    <option value="Lisans">Lisans</option>
+                                    <option value="Yüksek Lisans">Yüksek lisans</option>
+                                    <option value="Doktora">Doktora</option>
+
+                                </select>
+                            </td>
+
+                            <td><input type="text" name="OkulAdi" class="form-control" placeholder="Okul Adı" /></td>
+                            <td><input type="date" name="OgrenimBaslangicTarihi" class="form-control" /></td>
+                            <td><input type="date" name="OgrenimBitisTarihi" class="form-control" /></td>
+                            <td>
+                                <button type="submit" class="btn btn-success btn-sm">Kaydet</button>
+                                <a href="@Url.Action("Sil", "Home", new { id = sicil.SicilNo })" class="btn btn-danger btn-sm" onclick="return confirm('Kaydı silmek istediğinizden emin misiniz?');">Sil</a>
+                            </td>
+                            </form>
+                        }
                     </tr>
-                    </form>
+
                 }
             </tbody>
         </table>
@@ -101,10 +132,10 @@
 <script>
     function validateForm(form) {
         var ogrenimDurumu = form.OgrenimDurumu.value;
-        var okulAdi = form.OkulAdı.value;
-        var baslangicTarihi = form.EğitimBaslangicTarihi.value;
+        var okulAdi = form.OkulAdi.value;
+        var baslangicTarihi = form.OgrenimBaslangicTarihi.value;
 
-        if (ogrenimDurumu === "" || okulAdi === "" || baslangicTarihi === "" || ) {
+        if (ogrenimDurumu === "" || okulAdi === "" || baslangicTarihi === "" ) {
             document.getElementById("errorAlert").style.display = "block";
             return false;
         } else {

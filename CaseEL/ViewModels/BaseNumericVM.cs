@@ -8,7 +8,7 @@ namespace CaseEL.ViewModels
 {
     public class BaseNumericVM
     {
-        public int SicilNo { get; set; }
+        public int Id { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

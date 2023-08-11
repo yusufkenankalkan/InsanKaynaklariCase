@@ -11,8 +11,7 @@ namespace CaseEL.Models
     [Table("SicilOgrenimler")]
     public class SicilOgrenim : BaseNumeric
     {
-        [Key]
-        public int Id { get; set; }
+        
         public int SicilNo { get; set; }
         public string OgrenimDurumu { get; set; }
         public string OkulAdi { get; set; }

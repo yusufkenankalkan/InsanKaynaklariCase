@@ -27,7 +27,8 @@ namespace CaseDL.Migrations
                     OgrenimBaslangicTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OgrenimBitisTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsYeriAdi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDetayi = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    IsDetayi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IseAlindiMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,13 +41,13 @@ namespace CaseDL.Migrations
                 {
                     SicilNo = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Ad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Soyad = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     BaslamaTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BitisTarihi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DogumTarihi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AktifMi = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    AktifMi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -26,7 +26,8 @@ namespace CaseDL.Migrations
                 {
                     b.Property<int>("CvNo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CvNo"));
 
@@ -50,6 +51,9 @@ namespace CaseDL.Migrations
 
                     b.Property<string>("IsYeriAdi")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IseAlindiMi")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("OgrenimBaslangicTarihi")
                         .HasColumnType("datetime2");
@@ -118,7 +122,8 @@ namespace CaseDL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
@@ -153,7 +158,8 @@ namespace CaseDL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 

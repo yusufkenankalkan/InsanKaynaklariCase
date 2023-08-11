@@ -1,0 +1,77 @@
+﻿@using CaseEL.ViewModels;
+@model SicilOgrenimVM
+
+
+@{
+    ViewData["Title"] = "OgrenimDuzenle";
+}
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Index">Sicil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilUcret">Sicil Ücret</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/Home/SicilOgrenim">Sicil Öğrenim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/AdayCv">CV Tanımlama</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Rapor">Rapor</a>
+            </li>
+        </ul>
+    </div>
+    <br />
+    <div class="text-center">
+        <h3>Sicil Öğrenim Düzenleme Ekranı</h3>
+    </div>
+    <br />
+    <div class="alert alert-danger" id="errorAlert" style="display: none;">
+        Lütfen Gerekli Alanları Doldurunuz !!!
+    </div>
+    <div>
+        <form asp-controller="Home" asp-action="OgrenimDuzenle" method="post" onsubmit="return validateForm(this)">
+            <input type="hidden" name="SicilNo" value="@Model.SicilNo" />
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="ogrenimDurumu">Öğrenim Durumu</label>
+                    <input type="text" class="form-control" id="ogrenimDurumu" name="OgrenimDurumu" placeholder="Lise,Önlisans,Lisans vb." value="@Model.OgrenimDurumu">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="okulAdi">Okul Adı</label>
+                    <input type="text" class="form-control" id="okulAdi" name="OkulAdi" value="@Model.OkulAdi">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="date1">Eğitim Başlangıç Tarihi</label>
+                    <input type="date" class="form-control" id="date1" name="OgrenimBaslangicTarihi" value="@Model.OgrenimBaslangicTarihi.ToString("yyyy-MM-dd")">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="date2">Eğitim Bitiş Tarihi</label>
+                    <input type="date" class="form-control" id="date2" name="OgrenimBitisTarihi" value="@Model.OgrenimBitisTarihi?.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Güncelle</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function validateForm(form) {
+        var ogrenimDurumu = form.OgrenimDurumu.value;
+        var okulAdi = form.OkulAdi.value;
+        var baslangicTarihi = form.OgrenimBaslangicTarihi.value;
+
+        if (ogrenimDurumu === "" || okulAdi === "" || baslangicTarihi === "") {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>

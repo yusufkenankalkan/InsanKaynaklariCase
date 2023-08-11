@@ -1,0 +1,73 @@
+﻿@using CaseEL.ViewModels;
+@model SicilUcretVM
+
+@{
+    ViewData["Title"] = "UcretDuzenle";
+}
+
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Index">Sicil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="/Home/SicilUcret">Sicil Ücret</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/SicilOgrenim">Sicil Öğrenim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/AdayCv">CV Tanımlama</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Home/Rapor">Rapor</a>
+            </li>
+        </ul>
+    </div>
+    <br />
+    <div class="text-center">
+        <h3>Sicil Ücret Düzenleme Ekranı</h3>
+    </div>
+    <br />
+    <div class="alert alert-danger" id="errorAlert" style="display: none;">
+        Lütfen Gerekli Alanları Doldurunuz !!!
+    </div>
+    <div>
+        <form asp-controller="Home" asp-action="UcretDuzenle" method="post" onsubmit="return validateForm(this)">
+            <input type="hidden" name="SicilNo" value="@Model.SicilNo" />
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="ucreTipi">Ücret Tipi</label>
+                    <input type="text" class="form-control" id="ucretTipi" name="UcretTipi" placeholder="Net veya Brüt" value="@Model.UcretTipi">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="ucretTutari">Ücret Tutarı</label>
+                    <input type="text" class="form-control" id="ucretTutari" name="UcretTutari" value="@Model.UcretTutari">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="date1">Geçerlilik Başlangıç Tarihi</label>
+                    <input type="date" class="form-control" id="date1" name="GecerlilikBaslangicTarihi" value="@Model.GecerlilikBaslangicTarihi.ToString("yyyy-MM-dd")">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Güncelle</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function validateForm(form) {
+        var ucretTipi = form.UcretTipi.value;
+        var ucretTutari = form.UcretTutari.value;
+        var gecerlilikTarihi = form.GecerlilikBaslangicTarihi.value;
+
+        if (ucretTipi === "" || ucretTutari === "" || gecerlilikTarihi === "") {
+            document.getElementById("errorAlert").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("errorAlert").style.display = "none";
+            return true;
+        }
+    }
+</script>
+

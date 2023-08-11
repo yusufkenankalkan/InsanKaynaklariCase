@@ -37,6 +37,8 @@ namespace CaseEL.ViewModels
 
         public string? IsDetayi { get; set; }
 
+        public bool IseAlindiMi { get; set; }
+
     }
 
 }

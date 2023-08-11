@@ -11,9 +11,7 @@ namespace CaseEL.Models
     [Table("SicilUcretler")]
     public class SicilUcret : BaseNumeric
     {
-        [Key]
-        public int Id { get; set; }
-
+        
         public int SicilNo { get; set; }
 
         public string UcretTipi { get; set; } 

@@ -9,8 +9,12 @@ using System.Threading.Tasks;
 namespace CaseEL.Models
 {
     [Table("Siciller")]
-    public class Sicil : BaseNumeric
+    public class Sicil
     {
+        [Key]
+        [Column(Order = 1)]
+        public int SicilNo { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string Ad { get; set; }

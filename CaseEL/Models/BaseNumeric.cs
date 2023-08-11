@@ -12,7 +12,7 @@ namespace CaseEL.Models
     {
         [Key]
         [Column(Order = 1)]
-        public int SicilNo { get; set; }
+        public int Id { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
