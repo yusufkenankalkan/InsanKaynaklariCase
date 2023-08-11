@@ -122,6 +122,7 @@ namespace CaseUI.Controllers
             }
 
             sicil.AktifMi = false;
+            sicil.BitisTarihi = DateTime.Now;
             _context.SaveChanges();
 
             return RedirectToAction("Index");

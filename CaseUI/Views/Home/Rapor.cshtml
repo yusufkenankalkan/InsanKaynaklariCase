@@ -25,15 +25,52 @@
             </li>
         </ul>
     </div>
-    <div class="mt-2">
-        <input type="checkbox" id="aktifCalisan" onchange="filterTable()"> Aktif Çalışan
-        <input type="checkbox" id="pasifCalisan" onchange="filterTable()"> Pasif Çalışan
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="form-check">
+                    <br />
+                    <input class="form-check-input" type="checkbox" id="aktifCalisan" onchange="filterTable()">
+                    <label class="form-check-label" for="aktifCalisan">Aktif Çalışan</label>
+                </div>
+                <div class="form-check">
+                    <br />
+                    <input class="form-check-input" type="checkbox" id="pasifCalisan" onchange="filterTable()">
+                    <label class="form-check-label" for="pasifCalisan">Pasif Çalışan</label>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <label for="baslangicTarihi">İşe Başlangıç Tarihi Başlangıç:</label>
+                    <input type="date" class="form-control" id="baslangicTarihi">
+                </div>
+                <div class="form-group">
+                    <label for="bitisTarihi">İşe Başlangıç Tarihi Bitiş:</label>
+                    <input type="date" class="form-control" id="bitisTarihi">
+                </div>
+                <button class="btn btn-primary mt-2" onclick="filterTable()">Filtrele</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="form-group">
+                    <label for="ogrenimDurumu">Öğrenim Durumu:</label>
+                    <select class="form-control" id="ogrenimDurumu" onchange="filterTable()">
+                        <option value="">Tümü</option>
+                        <option value="İlkokul">İlkokul</option>
+                        <option value="Ortaokul">Ortaokul</option>
+                        <option value="Lise">Lise</option>
+                        <option value="Önlisans">Önlisans</option>
+                        <option value="Lisans">Lisans</option>
+                        <option value="Yüksek Lisans">Yüksek lisans</option>
+                        <option value="Doktora">Doktora</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mt-2">
-        İşe Başlangıç Tarihi Başlangıç: <input type="date" id="baslangicTarihi">
-        İşe Başlangıç Tarihi Bitiş: <input type="date" id="bitisTarihi">
-        <button onclick="filterTable()">Filtrele</button>
-    </div>
+
+
+
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
@@ -70,6 +107,7 @@
         let pasifChecked = $('#pasifCalisan').is(':checked');
         let baslangicTarihi = $('#baslangicTarihi').val();
         let bitisTarihi = $('#bitisTarihi').val();
+        let ogrenimDurumu = $('#ogrenimDurumu').val();
 
         let url = "/Home/GetTumCalisanlar";
 
@@ -99,16 +137,17 @@
                     const bitisTarihiFormatted = item.bitisTarihi ? formatDate(item.bitisTarihi) : "";
 
                     if ((!baslangicTarihi || item.baslamaTarihi >= baslangicTarihi) &&
-                        (!bitisTarihi || item.baslamaTarihi <= bitisTarihi)) {
+                        (!bitisTarihi || item.baslamaTarihi <= bitisTarihi) &&
+                        (!ogrenimDurumu || item.ogrenimDurumu === ogrenimDurumu)) {
                         tbodyContent += `<tr style="text-align:center">
-                                        <td>${item.sicilNo}</td>
-                                        <td>${item.ad}</td>
-                                        <td>${item.soyad}</td>
-                                        <td>${baslamaTarihiFormatted}</td>
-                                        <td>${bitisTarihiFormatted}</td>
-                                        <td>${item.ogrenimDurumu}</td>
-                                        <td>${item.aktifMi ? "Evet" : "Hayır"}</td>
-                                    </tr>`;
+                                                <td>${item.sicilNo}</td>
+                                                <td>${item.ad}</td>
+                                                <td>${item.soyad}</td>
+                                                <td>${baslamaTarihiFormatted}</td>
+                                                <td>${bitisTarihiFormatted}</td>
+                                                <td>${item.ogrenimDurumu}</td>
+                                                <td>${item.aktifMi ? "Evet" : "Hayır"}</td>
+                                            </tr>`;
                     }
                 });
 
@@ -120,3 +159,4 @@
         });
     }
 </script>
+

@@ -117,7 +117,7 @@
 <script>
     function validateForm(form) {
         var ucretTipi = form.UcretTipi.value;
-        var ucretTutari = form.UcretTutari.value;
+        var ucretTutari = form.UcretTutari.value.trim();
         var gecerlilikTarihi = form.GecerlilikBaslangicTarihi.value;
 
         if (ucretTipi === "" || ucretTutari === "" || gecerlilikTarihi === "") {

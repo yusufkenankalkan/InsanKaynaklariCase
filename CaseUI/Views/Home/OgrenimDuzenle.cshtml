@@ -62,8 +62,8 @@
 
 <script>
     function validateForm(form) {
-        var ogrenimDurumu = form.OgrenimDurumu.value;
-        var okulAdi = form.OkulAdi.value;
+        var ogrenimDurumu = form.OgrenimDurumu.value.trim();
+        var okulAdi = form.OkulAdi.value.trim();
         var baslangicTarihi = form.OgrenimBaslangicTarihi.value;
 
         if (ogrenimDurumu === "" || okulAdi === "" || baslangicTarihi === "") {

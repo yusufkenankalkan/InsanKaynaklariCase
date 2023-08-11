@@ -98,13 +98,13 @@
 
 <script>
     function validateForm() {
-        var isim = document.getElementById("isim").value;
-        var soyisim = document.getElementById("soyisim").value;
+        var isim = document.getElementById("isim").value.trim();
+        var soyisim = document.getElementById("soyisim").value.trim();
         var dogumTarihi = document.getElementById("date1").value;
         var cvOlusturmaTarihi = document.getElementById("date2").value;
         var ogrenimDurumu = document.getElementById("ogrenimDurumu").value;
-        var okulAdi = document.getElementById("okulAdi").value;
-        var bolum = document.getElementById("bolum").value;
+        var okulAdi = document.getElementById("okulAdi").value.trim();
+        var bolum = document.getElementById("bolum").value.trim();
         var egitimBaslangicTarihi = document.getElementById("date3").value;
 
         if (isim === "" || soyisim === "" || dogumTarihi === "" || cvOlusturmaTarihi === "" ||

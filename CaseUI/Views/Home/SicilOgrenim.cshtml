@@ -103,7 +103,6 @@
                                     <option value="Lisans">Lisans</option>
                                     <option value="Yüksek Lisans">Yüksek lisans</option>
                                     <option value="Doktora">Doktora</option>
-
                                 </select>
                             </td>
 
@@ -132,7 +131,7 @@
 <script>
     function validateForm(form) {
         var ogrenimDurumu = form.OgrenimDurumu.value;
-        var okulAdi = form.OkulAdi.value;
+        var okulAdi = form.OkulAdi.value.trim();
         var baslangicTarihi = form.OgrenimBaslangicTarihi.value;
 
         if (ogrenimDurumu === "" || okulAdi === "" || baslangicTarihi === "" ) {
